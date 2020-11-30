@@ -1,0 +1,19 @@
+using (WebClient client = new WebClient())
+            {
+                    response = client.DownloadString($"http://sms.htd.ps/API/SendSMS.aspx?id=eadaaac72e504a1f6e0b2a7a5cb60dc9&sender=easycharge1&to=970xxxxxx&msg=MessageHere&mode=1");
+                    //"OK|970123456789:serial"
+                    //sms.Id=
+                    try
+                    {
+                        string[] ss = response.Split((new char[] { '|' }));
+                        string[] sss = ss[1].Split((new char[] { ':' }));
+                        Console.WriteLine(ss[0]);
+                        Console.WriteLine(sss[0]);
+                        Console.WriteLine(sss[1]);
+                        sms.Status = ss[0];
+                        sms.ToNumber = sss[0];
+                        sms.Id = sss[1];
+                        sms.SaveData();
+                    }
+                    catch (Exception) { }
+            }
